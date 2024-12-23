@@ -8,6 +8,9 @@ cars_df = pd.read_csv('vehicles_us.csv')
 # Remove missing values
 cars_df.dropna(inplace=True)
 
+# Separate company name and car model if they are combined
+cars_df[['manufacturer', 'model']] = cars_df['model'].str.split(' ', 1, expand=True)
+
 # Convert model_year to integer
 cars_df['model_year'] = cars_df['model_year'].astype(int)
 
@@ -21,10 +24,10 @@ with col2:
     # Create dropdown menus
     car_type = st.selectbox('Select Car Type', cars_df['type'].unique())
     car_year_range = st.select_slider('Select Car Year Range', options=sorted(cars_df['model_year'].unique()), value=(cars_df['model_year'].min(), cars_df['model_year'].max()))
-    model = st.selectbox('Select Model', cars_df['model'].unique())
+    company_name = st.selectbox('Select Company Name', cars_df['manufacturer'].unique())
 
 # Filter the DataFrame based on selections
-filtered_df = cars_df[(cars_df['type'] == car_type) & (cars_df['model_year'] >= car_year_range[0]) & (cars_df['model_year'] <= car_year_range[1]) & (cars_df['model'] == model)]
+filtered_df = cars_df[(cars_df['type'] == car_type) & (cars_df['model_year'] >= car_year_range[0]) & (cars_df['model_year'] <= car_year_range[1]) & (cars_df['manufacturer'] == company_name)]
 
 # Create a Plotly Express scatter plot
 fig_scatter = px.scatter(filtered_df, x='model_year', y='price', title='Price vs Model Year')
