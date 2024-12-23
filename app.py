@@ -19,5 +19,5 @@ st.plotly_chart(fig_scatter)
 # Create a checkbox that changes the behavior of the scatter plot
 if st.checkbox('Show only cars with price above $10,000'):
     df_filtered = df[df['price'] > 10000]
-    fig_scatter_filtered = px.scatter(df_filtered, x='year', y='price', title='Price vs Year (Filtered)')
+    fig_scatter_filtered = px.scatter(df_filtered, x='year', y='model_year', title='Price vs Year (Filtered)')
     st.plotly_chart(fig_scatter_filtered)
