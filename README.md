@@ -22,18 +22,12 @@ To run this project on your local machine, follow these steps:
     cd your-repo-name
     ```
 
-2. **Create a virtual environment**:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
-
-3. **Install the required packages**:
+2. **Install the required packages**:
     ```bash
     pip install -r requirements.txt
     ```
 
-4. **Run the Streamlit app**:
+3. **Run the Streamlit app**:
     ```bash
     streamlit run app.py
     ```
