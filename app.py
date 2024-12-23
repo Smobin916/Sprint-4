@@ -16,9 +16,23 @@ st.plotly_chart(fig_hist)
 fig_scatter = px.scatter(cars_df, x='model_year', y='price', title='Price vs Model Year')
 st.plotly_chart(fig_scatter)
 
-# Create a checkbox that changes the behavior of the scatter plot
-if st.checkbox('Show only cars with price above $10,000'):
-    cars_df_filtered = cars_df[cars_df['price'] > 10000]
-    fig_scatter_filtered = px.scatter(cars_df_filtered, x='model_year', y='price', title='Price vs Model Year (Filtered)')
-    st.plotly_chart(fig_scatter_filtered)
+# Create checkboxes for each car to compare model_year and price
+for index, row in cars_df.iterrows():
+    col1, col2 = st.columns([1, 3])
+    with col1:
+        if st.checkbox(f"Compare {row['model']} ({row['model_year']}) - ${row['price']}", key=index):
+            with col2:
+                st.write(f"Model: {row['model']}")
+                st.write(f"Model Year: {row['model_year']}")
+                st.write(f"Price: ${row['price']}")
+                st.write(f"Condition: {row['condition']}")
+                st.write(f"Cylinders: {row['cylinders']}")
+                st.write(f"Fuel: {row['fuel']}")
+                st.write(f"Odometer: {row['odometer']}")
+                st.write(f"Transmission: {row['transmission']}")
+                st.write(f"Type: {row['type']}")
+                st.write(f"Paint Color: {row['paint_color']}")
+                st.write(f"Is 4WD: {row['is_4wd']}")
+                st.write(f"Date Posted: {row['date_posted']}")
+                st.write(f"Days Listed: {row['days_listed']}")
 
