@@ -8,9 +8,6 @@ cars_df = pd.read_csv('vehicles_us.csv')
 # Remove missing values
 cars_df.dropna(inplace=True)
 
-# Separate company name and car model if they are combined
-cars_df[['manufacturer', 'model']] = cars_df['model'].str.split(' ', 1, expand=True)
-
 # Convert model_year to integer
 cars_df['model_year'] = cars_df['model_year'].astype(int)
 
@@ -21,22 +18,25 @@ st.header('Car Sales Data Analysis')
 col1, col2 = st.columns([3, 1])
 
 with col2:
-    # Create dropdown menus
+    # Create dropdown menu for car type
     car_type = st.selectbox('Select Car Type', cars_df['type'].unique())
-    car_year_range = st.select_slider('Select Car Year Range', options=sorted(cars_df['model_year'].unique()), value=(cars_df['model_year'].min(), cars_df['model_year'].max()))
-    company_name = st.selectbox('Select Company Name', cars_df['manufacturer'].unique())
 
-# Filter the DataFrame based on selections
-filtered_df = cars_df[(cars_df['type'] == car_type) & (cars_df['model_year'] >= car_year_range[0]) & (cars_df['model_year'] <= car_year_range[1]) & (cars_df['manufacturer'] == company_name)]
+# Filter the DataFrame based on car type selection
+filtered_df = cars_df[cars_df['type'] == car_type]
 
-# Create a Plotly Express scatter plot
-fig_scatter = px.scatter(filtered_df, x='model_year', y='price', title='Price vs Model Year')
-st.plotly_chart(fig_scatter)
+# Create a Plotly Express scatter plot for car sales year to year
+fig_scatter_sales = px.scatter(filtered_df, x='model_year', y='price', title='Car Sales Year to Year')
+st.plotly_chart(fig_scatter_sales)
 
-# Create a Plotly Express histogram
-fig_hist = px.histogram(filtered_df, x='price', title='Price Distribution')
+# Create a Plotly Express histogram for total US sales yearly
+yearly_sales = cars_df.groupby('model_year').size().reset_index(name='total_sales')
+fig_hist = px.histogram(yearly_sales, x='model_year', y='total_sales', title='Total US Sales Yearly')
 st.plotly_chart(fig_hist)
 
+# Create a Plotly Express scatter plot for extra insights
+extra_insight = st.selectbox('Select Extra Insight', ['condition', 'cylinders', 'fuel', 'transmission', 'paint_color'])
+fig_scatter_insight = px.scatter(filtered_df, x='model_year', y='price', color=extra_insight, title=f'Price vs Model Year by {extra_insight.capitalize()}')
+st.plotly_chart(fig_scatter_insight)
 
 
 
