@@ -8,9 +8,6 @@ cars_df = pd.read_csv('vehicles_us.csv')
 # Remove missing values
 cars_df.dropna(inplace=True)
 
-# Convert model_year to integer
-cars_df['model_year'] = cars_df['model_year'].astype(int)
-
 # Create a header
 st.header('Car Sales Data Analysis')
 
