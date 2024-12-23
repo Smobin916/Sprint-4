@@ -8,10 +8,6 @@ cars_df = pd.read_csv('vehicles_us.csv')
 # Create a header
 st.header('Car Sales Data Analysis')
 
-# Create a Plotly Express scatter plot
-fig_scatter = px.scatter(cars_df, x='model_year', y='price', title='Price vs Model Year')
-st.plotly_chart(fig_scatter)
-
 # Create columns for layout
 col1, col2 = st.columns([3, 1])
 
@@ -23,17 +19,18 @@ with col2:
 # Filter the DataFrame based on selections
 filtered_df = cars_df[(cars_df['type'] == car_type) & (cars_df['model_year'] == car_year)]
 
-# Update the scatter plot based on selections
-fig_scatter_filtered = px.scatter(filtered_df, x='model_year', y='price', title='Price vs Model Year (Filtered)')
-st.plotly_chart(fig_scatter_filtered)
+# Create a Plotly Express histogram
+fig_hist = px.histogram(filtered_df, x='price', title='Price Distribution')
+st.plotly_chart(fig_hist)
 
-# Create a slider below the scatter plot
-price_range = st.slider('Select Price Range', int(cars_df['price'].min()), int(cars_df['price'].max()), (int(cars_df['price'].min()), int(cars_df['price'].max())))
+# Create a slider below the histogram
+price_range = st.slider('Select Price Range', 0, 50000, (0, 50000))
 
 # Filter the DataFrame based on price range
 filtered_df_price = filtered_df[(filtered_df['price'] >= price_range[0]) & (filtered_df['price'] <= price_range[1])]
 
-# Update the scatter plot based on price range
-fig_scatter_price_filtered = px.scatter(filtered_df_price, x='model_year', y='price', title='Price vs Model Year (Filtered by Price)')
-st.plotly_chart(fig_scatter_price_filtered)
+# Update the histogram based on price range
+fig_hist_price_filtered = px.histogram(filtered_df_price, x='price', title='Price Distribution (Filtered by Price)')
+st.plotly_chart(fig_hist_price_filtered)
+
 
