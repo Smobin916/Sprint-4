@@ -22,22 +22,23 @@ To run this project on your local machine, follow these steps:
     cd your-repo-name
     ```
 2. **Create a virtual environment**:
+    ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-
-3. **Install the required packages**:
+    ```
+4. **Install the required packages**:
     ```bash
     pip install -r requirements.txt
     ```
 
-4. **Run the Streamlit app**:
+5. **Run the Streamlit app**:
     ```bash
     streamlit run app.py
     ```
-5. **Access the application**:
-   Open your web browser and go to http://localhost:8501.
+6. **Access the application**:
+  ```Open your web browser and go to http://localhost:8501.
    This will launch your Streamlit app locally, allowing you to interact with the car sales data analysis dashboard.     
-
+  ```
 ## Dataset
 
 The dataset used in this project is `vehicles_us.csv`, which contains various attributes of car sales advertisements, such as price, model year, condition, and more.
