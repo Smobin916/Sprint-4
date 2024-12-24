@@ -21,16 +21,22 @@ To run this project on your local machine, follow these steps:
     git clone https://github.com/your-username/your-repo-name.git
     cd your-repo-name
     ```
+2. **Create a virtual environment**:
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-2. **Install the required packages**:
+3. **Install the required packages**:
     ```bash
     pip install -r requirements.txt
     ```
 
-3. **Run the Streamlit app**:
+4. **Run the Streamlit app**:
     ```bash
     streamlit run app.py
     ```
+5. **Access the application**:
+   Open your web browser and go to http://localhost:8501.
+   This will launch your Streamlit app locally, allowing you to interact with the car sales data analysis dashboard.     
 
 ## Dataset
 
