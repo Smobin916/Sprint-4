@@ -32,12 +32,12 @@ if show_scatter:
     fig_scatter_sales = px.scatter(filtered_df, x='model_year', y='price', title='Car Sales Year to Year')
     st.plotly_chart(fig_scatter_sales)
 
-# Create a Plotly Express histogram for total US sales yearly
-yearly_sales = cars_df.groupby('model_year').size().reset_index(name='total_sales')
-fig_hist = px.histogram(yearly_sales, x='model_year', y='total_sales', title='Total US Sales Yearly')
-st.plotly_chart(fig_hist)
-
 # Create a Plotly Express scatter plot for extra insights with price maxing out at 100k
 extra_insight = st.selectbox('Select Extra Insight', ['condition', 'cylinders', 'fuel', 'transmission', 'paint_color'])
 fig_scatter_insight = px.scatter(filtered_df, x='model_year', y='price', color=extra_insight, title=f'Price vs Model Year by {extra_insight.capitalize()}', range_y=[0, 100000])
 st.plotly_chart(fig_scatter_insight)
+
+# Create a Plotly Express histogram for total US sales yearly
+yearly_sales = cars_df.groupby('model_year').size().reset_index(name='total_sales')
+fig_hist = px.histogram(yearly_sales, x='model_year', y='total_sales', title='Total US Sales Yearly')
+st.plotly_chart(fig_hist)
