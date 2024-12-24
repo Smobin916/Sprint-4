@@ -36,9 +36,10 @@ To run this project on your local machine, follow these steps:
     streamlit run app.py
     ```
 6. **Access the application**:
-  ```Open your web browser and go to http://localhost:8501.
-   This will launch your Streamlit app locally, allowing you to interact with the car sales data analysis dashboard.     
-  ```
+     ```
+     Open your web browser and go to http://localhost:8501.
+     This will launch your Streamlit app locally, allowing you to interact with the car sales data analysis dashboard.     
+     ```
 ## Dataset
 
 The dataset used in this project is `vehicles_us.csv`, which contains various attributes of car sales advertisements, such as price, model year, condition, and more.
