@@ -5,8 +5,17 @@ import plotly.express as px
 # Read the dataset’s CSV file into a Pandas DataFrame
 cars_df = pd.read_csv('vehicles_us.csv')
 
-# Remove missing values
-cars_df.dropna(inplace=True)
+# Remove missing values except for model_year, cylinders, and odometer
+cars_df.dropna(subset=['price', 'condition', 'fuel', 'transmission', 'paint_color'], inplace=True)
+
+# Fill missing values in model_year by grouping by model and filling with the median year
+cars_df['model_year'] = cars_df.groupby('model')['model_year'].transform(lambda x: x.fillna(x.median()))
+
+# Fill missing values in cylinders by grouping by model and filling with the median cylinders
+cars_df['cylinders'] = cars_df.groupby('model')['cylinders'].transform(lambda x: x.fillna(x.median()))
+
+# Fill missing values in odometer by grouping by model_year and filling with the median odometer
+cars_df['odometer'] = cars_df.groupby('model_year')['odometer'].transform(lambda x: x.fillna(x.median()))
 
 # Convert model_year to integer
 cars_df['model_year'] = cars_df['model_year'].astype(int)
